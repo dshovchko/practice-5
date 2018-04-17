@@ -2,9 +2,9 @@
 
 Все привычные методы для запуска проекта и тестирования остаются с нами без изменений.
 
-Для дополнительной помощи в разработке на React поставьте плагин (React Developer Tools)[https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=ru] для браузера.
+Для дополнительной помощи в разработке на React поставьте плагин [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=ru) для браузера.
 
-Для дополнительной помощи в разработке на Redux поставьте плагин (Redux DevTools)[https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ru]
+Для дополнительной помощи в разработке на Redux поставьте плагин [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ru)
 
 ### Задача 1
 
@@ -138,7 +138,7 @@ https://codepen.io/taniarascia/pen/BpwOKZ
  При ошибке мы должны отобразить текст и кнопку для перезагрузки данных (метод `onClick` добавится позже):
 ```html
 <div className="weather">
-  <div className="error">Error occurred during data fetch. Try to <button onClick={this.props.fetchData}>reload</button></div>
+  <div className="error">Error occurred during data fetch. Try to <button>reload</button></div>
 </div>
 ``` 
  - проверьте работу компонента в каждом из состояний. Это можно сделать, изменяя значения по умолчанию в каждом из редьюсеров `reducers/week-forecast`
@@ -197,7 +197,8 @@ https://codepen.io/taniarascia/pen/BpwOKZ
  - подключите экшен `fetchDayForecast` к компоненту. Использовать lifecycle-метод `componentWillMount` не удастся,
  т.к. наш компонент отображает различные данные в зависимости от `selectedDt`. Поэтому добавьте вызов этого экшена
  в метод `componentWillUpdate`, в который React передает новые `props` перед тем как обновить компонент.
- Проверьте что `selectedDt` действительно будет изменен при апдейте `props`, и вызовите подключенный экшен
+ Проверьте что `selectedDt` действительно будет изменен при апдейте `props`, и вызовите подключенный экшен.
+ Также добавьте вызов этого экшена в обработчик клика на кнопке "Reload".
  - удалите импорт `data-generator`
  - напишите `propTypes` для полей и экшенов привязанных к компоненту
 
