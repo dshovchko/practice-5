@@ -108,7 +108,7 @@ https://codepen.io/taniarascia/pen/BpwOKZ
     },
     '1524085200000': {
       data: null, 
-      loading: true,  // запор послан, но еще не пришел 
+      loading: true,  // запрос послан, но еще не пришел
       error: false
     }
   },
