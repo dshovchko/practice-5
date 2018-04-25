@@ -53,6 +53,7 @@
     "jsdom": "^11.5.1",
     "mocha": "^4.1.0",
     "npm-run-all": "^4.1.2",
+    "redux-mock-store": "^1.5.1",
     "rollup": "^0.53.4",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^8.2.6",
@@ -60,6 +61,7 @@
     "rollup-plugin-multi-entry": "^2.0.2",
     "rollup-plugin-node-resolve": "^3.0.2",
     "rollup-watch-fix": "0.0.3",
+    "sinon": "^4.5.0",
     "source-map-support": "^0.5.0"
   },
   "dependencies": {

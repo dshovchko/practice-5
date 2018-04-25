@@ -20,4 +20,9 @@ const getDayForecast = dt =>
             ? Promise.resolve(days[dt])
             : Promise.reject(new Error("Day forecast fetch failed.")));
 
-export { getWeekForecast, getDayForecast };
+const api = {
+    getWeekForecast: getWeekForecast,
+    getDayForecast: getDayForecast
+};
+
+export { api };

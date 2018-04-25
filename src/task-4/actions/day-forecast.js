@@ -1,4 +1,4 @@
-import { getDayForecast } from "../api";
+import { api } from "../api";
 export const OPEN_DAY_DETAILS = "OPEN_DAY_DETAILS";
 export const FETCH_DAY_START = "FETCH_DAY_START";
 export const FETCH_DAY_SUCCESS = "FETCH_DAY_SUCCESS";
@@ -35,7 +35,7 @@ export const fetchDayForecast = (dt) => (dispatch, getState) => {
 
     dispatch(fetchDayStart(dt));
 
-    return getDayForecast(dt)
+    return api.getDayForecast(dt)
         .then(dayData => dispatch(fetchDaySuccess(dayData)))
         .catch(e => dispatch(fetchDayFailure(dt, e)));
 };
