@@ -20,13 +20,57 @@ describe('actions fetchDayForecast()', () => {
         stub.restore();
     });
 
-    it('creates FETCH_DAY_SUCCESS when fetching forecast has been done', () => {
+    it('should create FETCH_DAY_START at initial state', () => {
+    
+        const expectedActions = [
+            { type: actions.FETCH_DAY_START, dt: 12345 },
+        ];
+        const store = mockStore({
+            dayForecast: {}
+        });
+        store.dispatch(actions.fetchDayForecast(12345));
+        assert.deepEqual(store.getActions(), expectedActions, "checking expected actions");
+    });
+
+    it('should create nothing when data is already present', () => {
+    
+        const expectedActions = [];
+        const store = mockStore({
+            dayForecast: {
+                '12345': {
+                    data: {},
+                    loading: false,
+                    error: false
+                }
+            }
+        });
+        store.dispatch(actions.fetchDayForecast(12345));
+        assert.deepEqual(store.getActions(), expectedActions, "checking expected actions");
+    });
+
+    it('should create nothing when day forecast is loading', () => {
+    
+        const expectedActions = [];
+        const store = mockStore({
+            dayForecast: {
+                '12345': {
+                    data: null,
+                    loading: true,
+                    error: false
+                }
+            }
+        });
+        store.dispatch(actions.fetchDayForecast(12345));
+        assert.deepEqual(store.getActions(), expectedActions, "checking expected actions");
+    });
+
+    it('should create FETCH_DAY_SUCCESS when fetching forecast has been done', () => {
     
         const expectedActions = [
             { type: actions.FETCH_DAY_START, dt: 12345 },
             { type: actions.FETCH_DAY_SUCCESS, dayForecast: "Day Forecast" }
         ];
-        const store = mockStore({ dayForecast: {0: {}} });
+        const store = mockStore({ dayForecast: {} });
           
         return store.dispatch(actions.fetchDayForecast(12345))
             .then(() => {
@@ -34,7 +78,7 @@ describe('actions fetchDayForecast()', () => {
             });
     });
 
-    it('creates FETCH_DAY_FAILURE when fetching forecast has got error', () => {
+    it('should create FETCH_DAY_FAILURE when fetching forecast has got error', () => {
     
         const expectedActions = [
             { type: actions.FETCH_DAY_START, dt: 1 },

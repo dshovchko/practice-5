@@ -24,6 +24,32 @@ describe('actions fetchWeekForecast()', () => {
         stub.restore();
     });
 
+    it('should create FETCH_WEEK_START at initial state', () => {
+    
+        const expectedActions = [
+            { type: actions.FETCH_WEEK_START },
+        ];
+        const store = mockStore(state);
+        stub.resolves("Week Forecast");
+
+        store.dispatch(actions.fetchWeekForecast())
+        assert.deepEqual(store.getActions(), expectedActions, "checking expected actions");
+    });
+
+    it('should create nothing when week forecast is loading', () => {
+    
+        const expectedActions = [];
+        const store = mockStore({
+            weekForecast: [],
+            weekLoading: true,
+            weekError: false
+        });
+        stub.resolves("Week Forecast");
+
+        store.dispatch(actions.fetchWeekForecast())
+        assert.deepEqual(store.getActions(), expectedActions, "checking expected actions");
+    });
+
     it('creates FETCH_WEEK_SUCCESS when fetching forecast has been done', () => {
     
         const expectedActions = [
