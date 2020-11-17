@@ -1,7 +1,7 @@
-import chai from "chai";
+import chai from 'chai';
 
-import * as actions from "../../../../src/task-4/actions/day-forecast";
-import * as reducers from "../../../../src/task-4/reducers/day-forecast";
+import * as actions from '../../../../src/task-4/actions/day-forecast';
+import * as reducers from '../../../../src/task-4/reducers/day-forecast';
 
 const assert = chai.assert;
 

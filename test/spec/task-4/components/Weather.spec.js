@@ -1,12 +1,12 @@
-import chai from "chai";
+import chai from 'chai';
 import {Provider} from 'react-redux';
-import configureMockStore from "redux-mock-store";
-import thunk from "redux-thunk";
-import React from "react";
-import ReactTestUtils from "react-dom/test-utils";
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import React from 'react';
+import ReactTestUtils from 'react-dom/test-utils';
 
-import check from "../check";
-import Weather from "../../../../src/task-4/components/Weather";
+import check from '../check';
+import Weather from '../../../../src/task-4/components/Weather';
 
 const mockStore = configureMockStore([ thunk]);
 const assert = chai.assert;
@@ -43,8 +43,8 @@ const successState = {
                 max: 15.52
             },
             weather: {
-                description: "Misty",
-                icon: "mist"
+                description: 'Misty',
+                icon: 'mist'
             }
         },
         {
@@ -54,8 +54,8 @@ const successState = {
                 max: 11.98
             },
             weather: {
-                description: "Broken clouds",
-                icon: "broken-clouds"
+                description: 'Broken clouds',
+                icon: 'broken-clouds'
             }
         }
     ],
@@ -69,90 +69,90 @@ const createComponent = store => ReactTestUtils.renderIntoDocument(
     </Provider>
 );
 
-describe("<Weather />", () => {
+describe('<Weather />', () => {
 
-    it("type", () => {
+    it('type', () => {
         assert.isTrue(ReactTestUtils.isElementOfType(<Weather />, Weather));
     });
 
-    it("structure of empty component", () => {
+    it('structure of empty component', () => {
         const store = mockStore(initialState);
         const component = createComponent(store);
 
-        const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "div");
+        const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'div');
         check.divWeather(divs);
 
-        check.childrenCount(divs[0], 1);
+        check.childrenCount(divs[0], 2);
         const ul = divs[0].children[0];
-        check.classList(ul, ["list-inline", "mx-auto"]);
+        check.classList(ul, ['list-inline', 'mx-auto']);
     });
 
-    it("autoload of data when component was rendered", () => {
+    it('autoload of data when component was rendered', () => {
         const store = mockStore(initialState);
-        
+
         createComponent(store);
         assert.deepEqual(
             store.getActions(),
             [{ type: 'FETCH_WEEK_START' }],
-            "checking expected actions when component was rendered"
+            'checking expected actions when component was rendered'
         );
     });
 
-    it("structure of component when the forecast is receiving", () => {
+    it('structure of component when the forecast is receiving', () => {
         const store = mockStore(loadingState);
         const component = createComponent(store);
 
-        const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "div");
+        const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'div');
         check.divWeather(divs);
-        
+
         check.childrenCount(divs[0], 1);
         check.spinner(divs[0].children[0]);
     });
 
-    it("structure of component when the receiving of forecast is failed", () => {
+    it('structure of component when the receiving of forecast is failed', () => {
         const store = mockStore(errorState);
         const component = createComponent(store);
 
-        const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "div");
+        const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'div');
         check.divWeather(divs);
 
         check.childrenCount(divs[0], 1);
         const div = divs[0].children[0];
-        check.classList(div, ["error"]);
-        check.textContent(div, "Error occurred during data fetch. Try to reload");
+        check.classList(div, ['error']);
+        check.textContent(div, 'Error occurred during data fetch. Try to reload');
         check.childrenCount(div, 1);
-        check.tagName(div.children[0], "BUTTON");
+        check.tagName(div.children[0], 'BUTTON');
     });
 
-    it("clicking on reload button", () => {
+    it('clicking on reload button', () => {
         const store = mockStore(errorState);
         const component = createComponent(store);
 
-        const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "div");
+        const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'div');
         const button = divs[0].children[0].children[0];
         store.clearActions();
         ReactTestUtils.Simulate.click(button);
         assert.deepEqual(
             store.getActions(),
             [{ type: 'FETCH_WEEK_START' }],
-            "checking expected actions when clicked on reload button"
+            'checking expected actions when clicked on reload button'
         );
     });
 
-    it("structure of component when the forecast was successfuly received", () => {
+    it('structure of component when the forecast was successfuly received', () => {
         const store = mockStore(successState);
         const component = createComponent(store);
 
-        const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, "div");
+        const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'div');
         check.divWeather(divs);
 
-        check.childrenCount(divs[0], 1);
+        check.childrenCount(divs[0], 2);
         const ul = divs[0].children[0];
-        check.classList(ul, ["list-inline", "mx-auto"]);
+        check.classList(ul, ['list-inline', 'mx-auto']);
 
         check.childrenCount(ul, 2);
         const li = ul.children[0];
-        check.classList(li, ["list-inline-item"]);
+        check.classList(li, ['list-inline-item']);
     });
 
 });

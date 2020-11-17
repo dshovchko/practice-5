@@ -1,7 +1,7 @@
-import chai from "chai";
+import chai from 'chai';
 
-import * as actions from "../../../../src/task-4/actions/week-forecast";
-import * as reducers from "../../../../src/task-4/reducers/week-forecast";
+import * as actions from '../../../../src/task-4/actions/week-forecast';
+import * as reducers from '../../../../src/task-4/reducers/week-forecast';
 
 const assert = chai.assert;
 
@@ -87,7 +87,7 @@ describe('reducer weekForecast', () => {
     });
 
     it('should handle FETCH_WEEK_SUCCESS', () => {
-        const forecast = [1, "2", 3];
+        const forecast = [1, '2', 3];
 
         assert.deepEqual(reducer([], {
             type: actions.FETCH_WEEK_SUCCESS,
@@ -102,7 +102,7 @@ describe('reducer weekForecast', () => {
     });
 
     it('should handle other actions', () => {
-        const state = [1, "2", 3];
+        const state = [1, '2', 3];
 
         assert.deepEqual(reducer(state, {
             type: undefined
