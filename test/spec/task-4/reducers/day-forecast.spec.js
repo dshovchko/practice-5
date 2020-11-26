@@ -1,16 +1,12 @@
-import chai from 'chai';
-
 import * as actions from '../../../../src/task-4/actions/day-forecast';
 import * as reducers from '../../../../src/task-4/reducers/day-forecast';
-
-const assert = chai.assert;
 
 describe('reducer dayForecast', () => {
 
     const reducer = reducers.dayForecast;
 
     it('should return initial state', () => {
-        assert.deepEqual(reducer(undefined, {}), {});
+        expect(reducer(undefined, {})).toEqual({});
     });
 
     it('should handle FETCH_DAY_START', () => {
@@ -23,10 +19,10 @@ describe('reducer dayForecast', () => {
                 error: false
             }
         };
-        assert.deepEqual(reducer(prevState, {
+        expect(reducer(prevState, {
             type: actions.FETCH_DAY_START,
             dt: 1523998800000
-        }), newState);
+        })).toEqual(newState);
     });
 
     it('should handle FETCH_DAY_SUCCESS', () => {
@@ -59,7 +55,7 @@ describe('reducer dayForecast', () => {
                 error: false
             }
         };
-        assert.deepEqual(reducer(prevState, {
+        expect(reducer(prevState, {
             type: 'FETCH_DAY_SUCCESS',
             dayForecast: {
                 dt: 1524603600000,
@@ -77,7 +73,7 @@ describe('reducer dayForecast', () => {
                 deg: 29,
                 clouds: 19
             }
-        }), newState);
+        })).toEqual(newState);
     });
 
     it('should handle FETCH_DAY_FAILURE', () => {
@@ -95,10 +91,10 @@ describe('reducer dayForecast', () => {
                 error: true
             }
         };
-        assert.deepEqual(reducer(prevState, {
+        expect(reducer(prevState, {
             type: actions.FETCH_DAY_FAILURE,
             dt: 1523998800000
-        }), newState);
+        })).toEqual(newState);
     });
 
     it('should handle other actions', () => {
@@ -110,9 +106,9 @@ describe('reducer dayForecast', () => {
             }
         };
 
-        assert.equal(reducer(state, {
+        expect(reducer(state, {
             type: undefined
-        }), state);
+        })).toEqual(state);
     });
 });
 
@@ -122,19 +118,19 @@ describe('reducer selectedDb', () => {
     const reducer = reducers.selectedDt;
 
     it('should return initial state', () => {
-        assert.isNull(reducer(undefined, {}));
+        expect(reducer(undefined, {})).toBeNull();
     });
 
     it('should handle OPEN_DAY_DETAILS', () => {
-        assert.equal(reducer(null, {
+        expect(reducer(null, {
             type: actions.OPEN_DAY_DETAILS,
             dt: 123456789
-        }), 123456789);
+        })).toBe(123456789);
     });
 
     it('should handle other actions', () => {
-        assert.equal(reducer(123456789, {
+        expect(reducer(123456789, {
             type: undefined
-        }), 123456789);
+        })).toBe(123456789);
     });
 });

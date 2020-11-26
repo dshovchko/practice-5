@@ -1,4 +1,3 @@
-import chai from 'chai';
 import {Provider} from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -9,7 +8,6 @@ import check from '../check';
 import WeatherDay from '../../../../src/task-4/components/WeatherDay';
 
 const mockStore = configureMockStore([ thunk]);
-const assert = chai.assert;
 
 const dayForecast = {
     dt: 1524776400000,
@@ -38,7 +36,7 @@ const createComponent = store => ReactTestUtils.renderIntoDocument(
 describe('<WeatherDay />', () => {
 
     it('type', () => {
-        assert.isTrue(ReactTestUtils.isElementOfType(<WeatherDay />, WeatherDay));
+        expect(ReactTestUtils.isElementOfType(<WeatherDay />, WeatherDay)).toBeTruthy();
     });
 
     it('structure of component', () => {
@@ -48,7 +46,7 @@ describe('<WeatherDay />', () => {
         const component = createComponent(store);
 
         const lis = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'li');
-        assert.isAtLeast(lis.length, 1, 'number of li elements');
+        expect(lis.length).toBeGreaterThanOrEqual(1);
         check.className(lis[0], 'list-inline-item');
         check.childrenCount(lis[0], 3);
 
@@ -59,8 +57,8 @@ describe('<WeatherDay />', () => {
 
         const img = lis[0].children[1];
         check.tagName(img, 'IMG');
-        assert.equal(img.src.substr(-19), 'img/shower-rain.png', img.outerHTML);
-        assert.equal(img.alt, 'Shower rain', img.outerHTML);
+        expect(img.src.substr(-19)).toBe('img/shower-rain.png');
+        expect(img.alt).toBe('Shower rain');
 
         const div2 = lis[0].children[2];
         check.tagName(div2, 'DIV');
@@ -89,11 +87,6 @@ describe('<WeatherDay />', () => {
         const lis = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'li');
         store.clearActions();
         ReactTestUtils.Simulate.click(lis[0]);
-        assert.deepEqual(
-            store.getActions(),
-            [{ type: 'OPEN_DAY_DETAILS', dt: 1524776400000 }],
-            'checking expected actions when clicked on day forecast'
-        );
+        expect(store.getActions()).toEqual([{ type: 'OPEN_DAY_DETAILS', dt: 1524776400000 }]);
     });
-
 });

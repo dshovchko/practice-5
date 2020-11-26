@@ -1,13 +1,11 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import chai from 'chai';
 import sinon from 'sinon';
 
 import * as actions from '../../../../src/task-4/actions/day-forecast';
 import { api } from '../../../../src/task-4/api';
 
 const mockStore = configureMockStore([ thunk]);
-const assert = chai.assert;
 
 describe('actions fetchDayForecast()', () => {
     let stub;
@@ -29,7 +27,7 @@ describe('actions fetchDayForecast()', () => {
             dayForecast: {}
         });
         store.dispatch(actions.fetchDayForecast(12345));
-        assert.deepEqual(store.getActions(), expectedActions, 'checking expected actions');
+        expect(store.getActions()).toEqual(expectedActions);
     });
 
     it('should create nothing when data is already present', () => {
@@ -45,7 +43,7 @@ describe('actions fetchDayForecast()', () => {
             }
         });
         store.dispatch(actions.fetchDayForecast(12345));
-        assert.deepEqual(store.getActions(), expectedActions, 'checking expected actions');
+        expect(store.getActions()).toEqual(expectedActions);
     });
 
     it('should create nothing when day forecast is loading', () => {
@@ -61,7 +59,7 @@ describe('actions fetchDayForecast()', () => {
             }
         });
         store.dispatch(actions.fetchDayForecast(12345));
-        assert.deepEqual(store.getActions(), expectedActions, 'checking expected actions');
+        expect(store.getActions()).toEqual(expectedActions);
     });
 
     it('should create FETCH_DAY_SUCCESS when fetching forecast has been done', () => {
@@ -74,7 +72,7 @@ describe('actions fetchDayForecast()', () => {
 
         return store.dispatch(actions.fetchDayForecast(12345))
             .then(() => {
-                assert.deepEqual(store.getActions(), expectedActions, 'checking expected actions');
+                expect(store.getActions()).toEqual(expectedActions);
             });
     });
 
@@ -88,7 +86,7 @@ describe('actions fetchDayForecast()', () => {
 
         return store.dispatch(actions.fetchDayForecast(1))
             .then(() => {
-                assert.deepEqual(store.getActions(), expectedActions, 'checking expected actions');
+                expect(store.getActions()).toEqual(expectedActions);
             });
     });
 });
@@ -103,7 +101,7 @@ describe('action openDayDetails()', () => {
 
         store.dispatch(actions.openDayDetails(12345));
 
-        assert.deepEqual(store.getActions(), expectedAction, 'checking expected actions');
+        expect(store.getActions()).toEqual(expectedAction);
     });
 
     it('should be set by current dt', () => {
@@ -114,6 +112,6 @@ describe('action openDayDetails()', () => {
 
         store.dispatch(actions.openDayDetails(12345));
 
-        assert.deepEqual(store.getActions(), expectedAction, 'checking expected actions');
+        expect(store.getActions()).toEqual(expectedAction);
     });
 });
