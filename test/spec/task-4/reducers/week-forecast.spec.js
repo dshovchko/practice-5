@@ -6,31 +6,31 @@ describe('reducer weekError', () => {
     const reducer = reducers.weekError;
 
     it('should return initial state', () => {
-        expect(reducer(undefined, {})).toBeFalsy();
+        expect(reducer(undefined, {})).toBe(false);
     });
 
     it('should handle FETCH_WEEK_START', () => {
         expect(reducer(false, {
             type: actions.FETCH_WEEK_START
-        })).toBeFalsy();
+        })).toBe(false);
     });
 
     it('should handle FETCH_WEEK_SUCCESS', () => {
         expect(reducer(false, {
             type: actions.FETCH_WEEK_SUCCESS
-        })).toBeFalsy();
+        })).toBe(false);
     });
 
     it('should handle FETCH_WEEK_FAILURE', () => {
         expect(reducer(false, {
             type: actions.FETCH_WEEK_FAILURE
-        })).toBeTruthy();
+        })).toBe(true);
     });
 
     it('should handle other actions', () => {
         expect(reducer(true, {
             type: undefined
-        })).toBeTruthy();
+        })).toBe(true);
     });
 });
 
@@ -40,31 +40,31 @@ describe('reducer weekLoading', () => {
     const reducer = reducers.weekLoading;
 
     it('should return initial state', () => {
-        expect(reducer(undefined, {})).toBeFalsy();
+        expect(reducer(undefined, {})).toBe(false);
     });
 
     it('should handle FETCH_WEEK_START', () => {
         expect(reducer(false, {
             type: actions.FETCH_WEEK_START
-        })).toBeTruthy();
+        })).toBe(true);
     });
 
     it('should handle FETCH_WEEK_SUCCESS', () => {
         expect(reducer(true, {
             type: actions.FETCH_WEEK_SUCCESS
-        })).toBeFalsy();
+        })).toBe(false);
     });
 
     it('should handle FETCH_WEEK_FAILURE', () => {
         expect(reducer(true, {
             type: actions.FETCH_WEEK_FAILURE
-        })).toBeFalsy();
+        })).toBe(false);
     });
 
     it('should handle other actions', () => {
         expect(reducer(true, {
             type: undefined
-        })).toBeTruthy();
+        })).toBe(true);
     });
 });
 
