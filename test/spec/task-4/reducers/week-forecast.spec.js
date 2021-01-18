@@ -1,40 +1,36 @@
-import chai from 'chai';
-
 import * as actions from '../../../../src/task-4/actions/week-forecast';
 import * as reducers from '../../../../src/task-4/reducers/week-forecast';
-
-const assert = chai.assert;
 
 describe('reducer weekError', () => {
 
     const reducer = reducers.weekError;
 
     it('should return initial state', () => {
-        assert.equal(reducer(undefined, {}), false);
+        expect(reducer(undefined, {})).toBe(false);
     });
 
     it('should handle FETCH_WEEK_START', () => {
-        assert.equal(reducer(false, {
+        expect(reducer(false, {
             type: actions.FETCH_WEEK_START
-        }), false);
+        })).toBe(false);
     });
 
     it('should handle FETCH_WEEK_SUCCESS', () => {
-        assert.equal(reducer(false, {
+        expect(reducer(false, {
             type: actions.FETCH_WEEK_SUCCESS
-        }), false);
+        })).toBe(false);
     });
 
     it('should handle FETCH_WEEK_FAILURE', () => {
-        assert.equal(reducer(false, {
+        expect(reducer(false, {
             type: actions.FETCH_WEEK_FAILURE
-        }), true);
+        })).toBe(true);
     });
 
     it('should handle other actions', () => {
-        assert.equal(reducer(true, {
+        expect(reducer(true, {
             type: undefined
-        }), true);
+        })).toBe(true);
     });
 });
 
@@ -44,31 +40,31 @@ describe('reducer weekLoading', () => {
     const reducer = reducers.weekLoading;
 
     it('should return initial state', () => {
-        assert.equal(reducer(undefined, {}), false);
+        expect(reducer(undefined, {})).toBe(false);
     });
 
     it('should handle FETCH_WEEK_START', () => {
-        assert.equal(reducer(false, {
+        expect(reducer(false, {
             type: actions.FETCH_WEEK_START
-        }), true);
+        })).toBe(true);
     });
 
     it('should handle FETCH_WEEK_SUCCESS', () => {
-        assert.equal(reducer(true, {
+        expect(reducer(true, {
             type: actions.FETCH_WEEK_SUCCESS
-        }), false);
+        })).toBe(false);
     });
 
     it('should handle FETCH_WEEK_FAILURE', () => {
-        assert.equal(reducer(true, {
+        expect(reducer(true, {
             type: actions.FETCH_WEEK_FAILURE
-        }), false);
+        })).toBe(false);
     });
 
     it('should handle other actions', () => {
-        assert.equal(reducer(true, {
+        expect(reducer(true, {
             type: undefined
-        }), true);
+        })).toBe(true);
     });
 });
 
@@ -77,35 +73,35 @@ describe('reducer weekForecast', () => {
     const reducer = reducers.weekForecast;
 
     it('should return initial state', () => {
-        assert.deepEqual(reducer(undefined, {}), []);
+        expect(reducer(undefined, {})).toEqual([]);
     });
 
     it('should handle FETCH_WEEK_START', () => {
-        assert.deepEqual(reducer([], {
+        expect(reducer([], {
             type: actions.FETCH_WEEK_START
-        }), []);
+        })).toEqual([]);
     });
 
     it('should handle FETCH_WEEK_SUCCESS', () => {
         const forecast = [1, '2', 3];
 
-        assert.deepEqual(reducer([], {
+        expect(reducer([], {
             type: actions.FETCH_WEEK_SUCCESS,
             weekForecast: forecast
-        }), forecast);
+        })).toEqual(forecast);
     });
 
     it('should handle FETCH_WEEK_FAILURE', () => {
-        assert.deepEqual(reducer([], {
+        expect(reducer([], {
             type: actions.FETCH_WEEK_FAILURE
-        }), []);
+        })).toEqual([]);
     });
 
     it('should handle other actions', () => {
         const state = [1, '2', 3];
 
-        assert.deepEqual(reducer(state, {
+        expect(reducer(state, {
             type: undefined
-        }), state);
+        })).toEqual(state);
     });
 });

@@ -1,18 +1,14 @@
-import chai from 'chai';
-
-const assert = chai.assert;
-
 const classList = (el, classList) => {
     classList.forEach(e => {
-        assert.isTrue(el.classList.contains(e), `class ${e} in ${el.outerHTML}`);
+        expect(el.classList.contains(e)).toBeTruthy();
     });
 };
 const className = (el, className) => {
-    assert.equal(el.className, className, `class ${className} in ${el.outerHTML}`);
+    expect(el.className).toBe(className);
 };
 
 const childrenCount = (el, count) => {
-    assert.equal(el.children.length, count, `number of children elements in ${el.outerHTML}`);
+    expect(el.children.length).toBe(count);
 };
 
 const spinner = span => {
@@ -21,20 +17,20 @@ const spinner = span => {
 };
 
 const tagName = (el, name) => {
-    assert.equal(el.tagName, name, el.outerHTML);
+    expect(el.tagName).toBe(name);
 };
 
 const textContent = (el, text) => {
-    assert.equal(el.textContent, text, el.outerHTML);
+    expect(el.textContent).toBe(text);
 };
 
 const divWeather = divs => {
-    assert.isAtLeast(divs.length, 1, 'number of div elements');
+    expect(divs.length).toBeGreaterThanOrEqual(1);
     className(divs[0], 'weather');
 };
 
 const divDetails = divs => {
-    assert.isAtLeast(divs.length, 1, 'number of div elements');
+    expect(divs.length).toBeGreaterThanOrEqual(1);
     className(divs[0], 'details');
 };
 

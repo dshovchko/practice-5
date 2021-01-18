@@ -1,13 +1,11 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import chai from 'chai';
 import sinon from 'sinon';
 
 import * as actions from '../../../../src/task-4/actions/week-forecast';
 import { api } from '../../../../src/task-4/api';
 
 const mockStore = configureMockStore([ thunk]);
-const assert = chai.assert;
 
 const state = {
     weekForecast: [],
@@ -33,7 +31,7 @@ describe('actions fetchWeekForecast()', () => {
         stub.resolves('Week Forecast');
 
         store.dispatch(actions.fetchWeekForecast());
-        assert.deepEqual(store.getActions(), expectedActions, 'checking expected actions');
+        expect(store.getActions()).toEqual(expectedActions);
     });
 
     it('should create nothing when week forecast is loading', () => {
@@ -47,7 +45,7 @@ describe('actions fetchWeekForecast()', () => {
         stub.resolves('Week Forecast');
 
         store.dispatch(actions.fetchWeekForecast());
-        assert.deepEqual(store.getActions(), expectedActions, 'checking expected actions');
+        expect(store.getActions()).toEqual(expectedActions);
     });
 
     it('creates FETCH_WEEK_SUCCESS when fetching forecast has been done', () => {
@@ -61,7 +59,7 @@ describe('actions fetchWeekForecast()', () => {
 
         return store.dispatch(actions.fetchWeekForecast())
             .then(() => {
-                assert.deepEqual(store.getActions(), expectedActions, 'checking expected actions');
+                expect(store.getActions()).toEqual(expectedActions);
             });
     });
 
@@ -76,7 +74,7 @@ describe('actions fetchWeekForecast()', () => {
 
         return store.dispatch(actions.fetchWeekForecast())
             .then(() => {
-                assert.deepEqual(store.getActions(), expectedActions, 'checking expected actions');
+                expect(store.getActions()).toEqual(expectedActions);
             });
     });
 });

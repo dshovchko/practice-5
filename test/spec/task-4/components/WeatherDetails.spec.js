@@ -1,4 +1,3 @@
-import chai from 'chai';
 import {Provider} from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -9,7 +8,6 @@ import check from '../check';
 import WeatherDetails from '../../../../src/task-4/components/WeatherDetails';
 
 const mockStore = configureMockStore([ thunk]);
-const assert = chai.assert;
 
 const initialState = {
     dayForecast: {},
@@ -70,7 +68,7 @@ const createComponent = store => ReactTestUtils.renderIntoDocument(
 describe('<WeatherDetails />', () => {
 
     it('type', () => {
-        assert.isTrue(ReactTestUtils.isElementOfType(<WeatherDetails />, WeatherDetails));
+        expect(ReactTestUtils.isElementOfType(<WeatherDetails />, WeatherDetails)).toBeTruthy();
     });
 
     it('structure of empty component', () => {
@@ -84,7 +82,7 @@ describe('<WeatherDetails />', () => {
         );
 
         const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'div');
-        assert.equal(divs.length, 1, 'must be empty');
+        expect(divs.length).toBe(1);
     });
 
     it('structure of component when the detail forecast is receiving', () => {
@@ -120,14 +118,10 @@ describe('<WeatherDetails />', () => {
         const button = divs[0].children[0].children[0];
         store.clearActions();
         ReactTestUtils.Simulate.click(button);
-        assert.deepEqual(
-            store.getActions(),
-            [{
-                type: 'FETCH_DAY_START',
-                dt: 1524949200000
-            }],
-            'checking expected actions when clicked on reload button'
-        );
+        expect(store.getActions()).toEqual([{
+            type: 'FETCH_DAY_START',
+            dt: 1524949200000
+        }]);
     });
 
     it('structure of component when the forecast was successfuly received', () => {
@@ -147,8 +141,8 @@ describe('<WeatherDetails />', () => {
 
         const img = b1.children[1];
         check.tagName(img, 'IMG');
-        assert.equal(img.src.substr(-19), 'img/shower-rain.png', img.outerHTML);
-        assert.equal(img.alt, 'Shower rain', img.outerHTML);
+        expect(img.src.substr(-19)).toBe('img/shower-rain.png');
+        expect(img.alt).toBe('Shower rain');
 
         const b2 = divs[0].children[1];
         check.childrenCount(b2, 1);
@@ -184,5 +178,4 @@ describe('<WeatherDetails />', () => {
         check.tagName(b3.children[0].children[5], 'DD');
         check.textContent(b3.children[0].children[5], '989 hpa');
     });
-
 });

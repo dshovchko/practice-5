@@ -1,4 +1,3 @@
-import chai from 'chai';
 import {Provider} from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -9,7 +8,6 @@ import check from '../check';
 import Weather from '../../../../src/task-4/components/Weather';
 
 const mockStore = configureMockStore([ thunk]);
-const assert = chai.assert;
 
 const initialState = {
     dayForecast: {},
@@ -72,7 +70,7 @@ const createComponent = store => ReactTestUtils.renderIntoDocument(
 describe('<Weather />', () => {
 
     it('type', () => {
-        assert.isTrue(ReactTestUtils.isElementOfType(<Weather />, Weather));
+        expect(ReactTestUtils.isElementOfType(<Weather />, Weather)).toBeTruthy();
     });
 
     it('structure of empty component', () => {
@@ -91,11 +89,7 @@ describe('<Weather />', () => {
         const store = mockStore(initialState);
 
         createComponent(store);
-        assert.deepEqual(
-            store.getActions(),
-            [{ type: 'FETCH_WEEK_START' }],
-            'checking expected actions when component was rendered'
-        );
+        expect(store.getActions()).toEqual([{ type: 'FETCH_WEEK_START' }]);
     });
 
     it('structure of component when the forecast is receiving', () => {
@@ -132,11 +126,7 @@ describe('<Weather />', () => {
         const button = divs[0].children[0].children[0];
         store.clearActions();
         ReactTestUtils.Simulate.click(button);
-        assert.deepEqual(
-            store.getActions(),
-            [{ type: 'FETCH_WEEK_START' }],
-            'checking expected actions when clicked on reload button'
-        );
+        expect(store.getActions()).toEqual([{ type: 'FETCH_WEEK_START' }]);
     });
 
     it('structure of component when the forecast was successfuly received', () => {

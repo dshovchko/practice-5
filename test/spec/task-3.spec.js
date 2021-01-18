@@ -1,10 +1,7 @@
-import chai from 'chai';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 
 import Tabs from '../../src/task-3';
-
-const assert = chai.assert;
 
 const tabs = [
     { header: 't-h 1', content: 't-b 3' },
@@ -13,56 +10,56 @@ const tabs = [
 ];
 
 function checkHeader(box, data, getVal, active) {
-    assert.equal(box.children.length, 3, `count of content divs in ${box.outerHTML}`);
+    expect(box.children.length).toBe(3);
     data.forEach((el, i) => {
-        assert.equal(box.children[i].textContent, getVal(el), `content ${box.outerHTML}`);
+        expect(box.children[i].textContent).toBe(getVal(el));
         if (i === active) {
-            assert.isTrue(box.children[i].classList.contains('active'), `active element of headers ${box.children[i].outerHTML} has class "active"`);
+            expect(box.children[i].classList.contains('active')).toBeTruthy();
         } else {
-            assert.isFalse(box.children[i].classList.contains('active'), `inactive element of headers ${box.children[i].outerHTML} hasn't class "active"`);
+            expect(box.children[i].classList.contains('active')).toBeFalsy();
         }
     });
 }
 
 function checkContent(box, data, getVal, active) {
-    assert.equal(box.children.length, 3, `count of content divs in ${box.outerHTML}`);
+    expect(box.children.length).toBe(3);
     data.forEach((el, i) => {
-        assert.equal(box.children[i].textContent, getVal(el), `content ${box.outerHTML}`);
+        expect(box.children[i].textContent).toBe(getVal(el));
         if (i === active) {
-            assert.isFalse(box.children[i].classList.contains('d-none'), `active element of content ${box.children[i].outerHTML} hasn't class "d-none"`);
+            expect(box.children[i].classList.contains('d-none')).toBeFalsy();
         } else {
-            assert.isTrue(box.children[i].classList.contains('d-none'), `inactive element of content ${box.children[i].outerHTML} has class "d-none"`);
+            expect(box.children[i].classList.contains('d-none')).toBeTruthy();
         }
     });
 }
 
-function checkActive(hBox, cBox, index, message) {
-    assert.isTrue(hBox.children[index].classList.contains('active'), `${message}, class active in header`);
-    assert.isFalse(cBox.children[index].classList.contains('d-none'), `${message}, class d-none in content`);
+function checkActive(hBox, cBox, index) {
+    expect(hBox.children[index].classList.contains('active')).toBeTruthy();
+    expect(cBox.children[index].classList.contains('d-none')).toBeFalsy();
 }
-function checkInactive(hBox, cBox, index, message) {
-    assert.isFalse(hBox.children[index].classList.contains('active'), `${message}, class active in header`);
-    assert.isTrue(cBox.children[index].classList.contains('d-none'), `${message}, class d-none in content`);
+function checkInactive(hBox, cBox, index) {
+    expect(hBox.children[index].classList.contains('active')).toBeFalsy();
+    expect(cBox.children[index].classList.contains('d-none')).toBeTruthy();
 }
 
 describe('<Tabs />', () => {
 
     it('type', () => {
-        assert.isTrue(ReactTestUtils.isElementOfType(<Tabs />, Tabs));
+        expect(ReactTestUtils.isElementOfType(<Tabs />, Tabs)).toBeTruthy();
     });
 
     it('structure of component', () => {
         const component = ReactTestUtils.renderIntoDocument(<Tabs tabs={tabs}/>);
         const divs = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'div');
 
-        assert.equal(divs[0].className, 'row');
-        assert.equal(divs[0].children.length, 2, 'count elements of container div');
-        assert.equal(divs[0].children[0].tagName, 'UL', divs[0].children.innerHTML);
-        assert.isTrue(divs[0].children[0].classList.contains('col-3'), 'class col-3 in ' + divs[0].children[0].innerHTML);
-        assert.isTrue(divs[0].children[0].classList.contains('list-group'), 'class list-group in ' + divs[0].children[0].innerHTML);
+        expect(divs[0].className).toBe('row');
+        expect(divs[0].children.length).toBe(2);
+        expect(divs[0].children[0].tagName).toBe('UL');
+        expect(divs[0].children[0].classList.contains('col-3')).toBeTruthy();
+        expect(divs[0].children[0].classList.contains('list-group')).toBeTruthy();
 
         checkHeader(divs[0].children[0], tabs, el => el.header, 0);
-        assert.equal(divs[1].className, 'col-9');
+        expect(divs[1].className).toBe('col-9');
         checkContent(divs[1], tabs, el => el.content, 0);
     });
 
@@ -88,15 +85,15 @@ describe('<Tabs />', () => {
         const headers = divs[0].children[0];
         const bodies = divs[1];
 
-        checkInactive(headers, bodies, 1, 'before click');
+        checkInactive(headers, bodies, 1);
 
         ReactTestUtils.Simulate.click(headers.children[1]);
-        checkActive(headers, bodies, 1, 'after click');
+        checkActive(headers, bodies, 1);
 
         ReactTestUtils.Simulate.click(headers.children[1]);
-        checkActive(headers, bodies, 1, 'repeated click');
+        checkActive(headers, bodies, 1);
 
         ReactTestUtils.Simulate.click(headers.children[2]);
-        checkInactive(headers, bodies, 1, 'click on another tab');
+        checkInactive(headers, bodies, 1);
     });
 });
